@@ -6,6 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
@@ -77,7 +78,9 @@ const Home = () => {
                                 </p>
                             </CardContent>
                             <CardActions>
-                                <Button size="medium" variant="outlined">Learn More</Button>
+                                <Link to={`/pokemon/${pokemon.name}`}>
+                                    <Button size="medium" variant="outlined">Learn More</Button>
+                                </Link>
                             </CardActions>
                         </Card>
                     )
