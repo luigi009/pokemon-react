@@ -72,7 +72,7 @@ export default function Pokemon() {
       <div className='flex justify-start items-center'>
         <Tooltip title='Go back' arrow>
           <IconButton aria-label="settings" onClick={goBack}>
-            <ArrowBackIcon fontSize='large' className='text-[#c71d1f]' />
+            <ArrowBackIcon fontSize='large' />
           </IconButton>
         </Tooltip>
       </div>

@@ -10,7 +10,7 @@ export default function Navbar() {
     const totalFavorite = favoritePokemon.length;
   return (
       <>
-          <div className='flex justify-between items-center px-6 py-2'>
+          <div className='flex justify-between items-center px-6 py-1 bg-[#191d21]'>
               <div className='flex justify-start items-center'>
                   <Link to='/'>
                       <img src='/pokeapi_image.png' alt='pokeapi_image' className='w-34 h-12' />
@@ -21,7 +21,7 @@ export default function Navbar() {
                     <Tooltip title='My Favorites Pokemons'>
                           <IconButton>
                             <Badge badgeContent={totalFavorite} color='error'>
-                                <FavoriteIcon fontSize='large' />
+                                <FavoriteIcon className='text-white' fontSize='large' />
                             </Badge>
                         </IconButton>
                     </Tooltip>

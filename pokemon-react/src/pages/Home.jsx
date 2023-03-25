@@ -7,6 +7,7 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
 import { Link } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
 
 const Home = () => {
 
@@ -49,7 +50,10 @@ const Home = () => {
                 //Limit the number of pokemons to show in the page
                 pokemonCharacter.length && pokemonCharacter.slice((page - 1) * 10, page * 10).map((pokemon, index) => {
                     return (
-                        <Card key={index} sx={345}>
+                        <Card key={index} sx={{
+                            maxWidth: 345,
+                            backgroundColor: '#191d21',
+                        }}>
                             <div className='flex justify-center items-center'>
                                 <CardMedia
                                     component="img"
@@ -67,19 +71,21 @@ const Home = () => {
                                     }}
                                     />
                             </div>
-                            <CardContent sx={{
-                                backgroundColor: '#f5f5f5',
+                            <CardContent className='drop-shadow-2xl' sx={{
+                                backgroundColor: '#25292c',
                             }}>
-                                <p className='text-3xl font-semibold sm:text-xl xl:text-xl 2xl:text-4xl'>
+                                <Typography gutterBottom variant="h5" component="div" sx={{
+                                    color: '#b5b5b5',
+                                }}>
                                     {
                                         //Make the first letter of the pokemon name uppercase
                                         pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
                                     }
-                                </p>
+                                </Typography>
                             </CardContent>
                             <CardActions>
                                 <Link to={`/pokemon/${pokemon.name}`}>
-                                    <Button size="medium" variant="outlined">Learn More</Button>
+                                    <Button size="medium">Learn More</Button>
                                 </Link>
                             </CardActions>
                         </Card>
@@ -87,7 +93,7 @@ const Home = () => {
                 })
                 }
           </div>
-          <div className='mt-8 flex justify-center items-center w-full'>
+          <div className='mt-4 flex justify-center items-center w-full'>
             <Pagination count={16} page={page} onChange={handleChangePage} color="primary" />
           </div>
       </>
