@@ -50,6 +50,18 @@ export default function Pokemon() {
     }
   }
 
+  //Use the useEffect to check if the pokemon is already in the local storage
+  //If the pokemon is already in the local storage change the color of the icon
+  useEffect(() => {
+    const favoritePokemon = JSON.parse(localStorage.getItem('favoritePokemon')) || [];
+    const isFavorite = favoritePokemon.find(pokemon => pokemon.name === name);
+    
+    if (isFavorite) {
+      setFavorite(true);
+      document.querySelector('.favorite-icon').style.color = 'red';
+    }
+  }, []);
+
   //Go back the previous page
   const goBack = () => {
     window.history.back();

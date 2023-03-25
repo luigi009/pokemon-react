@@ -61,8 +61,8 @@ const Home = () => {
 
                                         //Make the image responsive
                                         '@media (min-width: 1100px) and (max-width: 1280px)': {
-                                            height: 150,
-                                            width: 150,
+                                            height: 140,
+                                            width: 140,
                                         },
                                     }}
                                     />
