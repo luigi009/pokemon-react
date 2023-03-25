@@ -50,7 +50,7 @@ const Home = () => {
                 //Limit the number of pokemons to show in the page
                 pokemonCharacter.length && pokemonCharacter.slice((page - 1) * 10, page * 10).map((pokemon, index) => {
                     return (
-                        <Card key={index} sx={{
+                        <Card className='drop-shadow-lg' key={index} sx={{
                             maxWidth: 345,
                             backgroundColor: '#191d21',
                         }}>

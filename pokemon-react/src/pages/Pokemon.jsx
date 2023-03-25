@@ -72,16 +72,17 @@ export default function Pokemon() {
       <div className='flex justify-start items-center'>
         <Tooltip title='Go back' arrow>
           <IconButton aria-label="settings" onClick={goBack}>
-            <ArrowBackIcon fontSize='large' />
+            <ArrowBackIcon className='text-[#c71d1f]' fontSize='large' />
           </IconButton>
         </Tooltip>
       </div>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center drop-shadow-lg">
         <Card sx={{
           maxWidth: 345,
+          backgroundColor: '#191d21',
         }}>
           <CardHeader
-            className='text-black font-bold'
+            className='text-[#b5b5b5] font-bold'
             action={
               <Tooltip title={
                 favorite ? 'Remove from favorites' : 'Add to favorites'
@@ -93,6 +94,9 @@ export default function Pokemon() {
             }
             //Make the first letter of the name uppercase
             title={pokemon.name && pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+            sx={{
+              backgroundColor: '#25292c',
+            }}
           />
           <div className='flex justify-center items-center'>
           <CardMedia
@@ -111,21 +115,21 @@ export default function Pokemon() {
               }}
             />
             </div>
-          <CardContent className='text-black bg-[#e5e5e5]'>
-            <p><strong>Height:</strong> {pokemon.height}</p>
-            <p><strong>Weight:</strong> {pokemon.weight}</p>
-            <p><strong>Abilities:</strong> {pokemon.abilities && pokemon.abilities.map((ability, index) => {
+          <CardContent className='text-black bg-[#25292c]'>
+            <p className='text-[#b5b5b5] leading-7'><strong>Height:</strong> {pokemon.height}</p>
+            <p className='text-[#b5b5b5] leading-7'><strong>Weight:</strong> {pokemon.weight}</p>
+            <p className='text-[#b5b5b5] leading-7'><strong>Abilities:</strong> {pokemon.abilities && pokemon.abilities.map((ability, index) => {
               return (
                 <span key={index}>{ability.ability.name} </span>
               )
             })}</p>
-            <p><strong>Types:</strong> {pokemon.types && pokemon.types.map((type, index) => {
+            <p className='text-[#b5b5b5] leading-7'><strong>Types:</strong> {pokemon.types && pokemon.types.map((type, index) => {
               return (
                 <span key={index}>{type.type.name} </span>
               )
             })}</p>
-            <p><strong>Species:</strong> {pokemon.species && pokemon.species.name}</p>
-            <table className='table-auto'>
+            <p className='text-[#b5b5b5] leading-7'><strong>Species:</strong> {pokemon.species && pokemon.species.name}</p>
+            <table className='table-auto text-[#b5b5b5] mt-4'>
               <thead>
                 <tr>
                   <th className='px-4 py-2'>Stat</th>
