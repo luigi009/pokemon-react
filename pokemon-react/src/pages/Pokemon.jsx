@@ -3,6 +3,12 @@ import axios from 'axios';
 import { useParams } from 'react-router';
 import { IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import Tooltip from '@mui/material/Tooltip';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export default function Pokemon() {
   const [pokemon, setPokemon] = useState([]);
@@ -19,54 +25,114 @@ export default function Pokemon() {
     getPokemon();
   }, []);
 
+  //Funciton when click in the favorite button change the color of the icon
+  const [favorite, setFavorite] = useState(false);
+  const handleFavorite = () => {
+    setFavorite(!favorite);
+
+    if (favorite) {
+      document.querySelector('.favorite-icon').style.color = '#e5e5e5';
+    } else {
+      document.querySelector('.favorite-icon').style.color = 'red';
+    }
+
+    //Save the favorite pokemon in the local storage
+    //But first check if the pokemon is already in the local storage
+    const favoritePokemon = JSON.parse(localStorage.getItem('favoritePokemon')) || [];
+    const isFavorite = favoritePokemon.find(pokemon => pokemon.name === name);
+
+    if (isFavorite) {
+      const newFavoritePokemon = favoritePokemon.filter(pokemon => pokemon.name !== name);
+      localStorage.setItem('favoritePokemon', JSON.stringify(newFavoritePokemon));
+    } else {
+      const newFavoritePokemon = [...favoritePokemon, pokemon];
+      localStorage.setItem('favoritePokemon', JSON.stringify(newFavoritePokemon));
+    }
+  }
+
+  //Go back the previous page
+  const goBack = () => {
+    window.history.back();
+  }
+
   return (
     <>
-      <div className="flex justify-center items-center">
-        <div className="flex flex-col justify-center items-center">
-          <img className='w-40 h-40' src={pokemon.sprites?.front_default} alt={pokemon.name} />
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+      <div className='flex justify-start items-center'>
+        <Tooltip title='Go back' arrow>
+          <IconButton aria-label="settings" onClick={goBack}>
+            <ArrowBackIcon fontSize='large' className='text-[#c71d1f]' />
           </IconButton>
-          <h1 className="text-2xl font-bold">{pokemon.name}</h1>
-          <div className="flex flex-col justify-center items-center">
-            <h2 className="text-xl font-bold">Abilities</h2>
-            <div className="flex flex-col justify-center items-center">
-              {
-                pokemon.abilities?.map((ability, index) => {
-                  return (
-                    <p key={index}>{ability.ability.name}</p>
-                  )
-                })
-              }
-            </div>
-          </div>
+        </Tooltip>
+      </div>
+      <div className="flex justify-center items-center">
+        <Card sx={{
+          maxWidth: 345,
+        }}>
+          <CardHeader
+            className='text-black font-bold'
+            action={
+              <Tooltip title={
+                favorite ? 'Remove from favorites' : 'Add to favorites'
+              } arrow>
+                <IconButton aria-label="settings" onClick={handleFavorite}>
+                  <FavoriteIcon className='favorite-icon text-[#e5e5e5]' />
+                </IconButton>
+              </Tooltip>
+            }
+            //Make the first letter of the name uppercase
+            title={pokemon.name && pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+          />
+          <div className='flex justify-center items-center'>
+          <CardMedia
+            component="img"
+            image={pokemon.species && pokemon.species.url && `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+            alt={pokemon.name}
+            sx={{
+                  height: 250,
+                  width: 250,
 
-          <div className="flex flex-col justify-center items-center">
-            <h2 className="text-xl font-bold">Types</h2>
-            <div className="flex flex-col justify-center items-center">
-              {
-                pokemon.types?.map((type, index) => {
-                  return (
-                    <p key={index}>{type.type.name}</p>
-                  )
-                })
-              }
+                  //Make the image responsive
+                  '@media (min-width: 1100px) and (max-width: 1280px)': {
+                      height: 190,
+                      width: 190,
+                  },
+              }}
+            />
             </div>
-          </div>
-
-          <div className="flex flex-col justify-center items-center">
-            <h2 className="text-xl font-bold">Stats</h2>
-            <div className="flex flex-col justify-center items-center">
-              {
-                pokemon.stats?.map((stat, index) => {
+          <CardContent className='text-black bg-[#e5e5e5]'>
+            <p><strong>Height:</strong> {pokemon.height}</p>
+            <p><strong>Weight:</strong> {pokemon.weight}</p>
+            <p><strong>Abilities:</strong> {pokemon.abilities && pokemon.abilities.map((ability, index) => {
+              return (
+                <span key={index}>{ability.ability.name} </span>
+              )
+            })}</p>
+            <p><strong>Types:</strong> {pokemon.types && pokemon.types.map((type, index) => {
+              return (
+                <span key={index}>{type.type.name} </span>
+              )
+            })}</p>
+            <p><strong>Species:</strong> {pokemon.species && pokemon.species.name}</p>
+            <table className='table-auto'>
+              <thead>
+                <tr>
+                  <th className='px-4 py-2'>Stat</th>
+                  <th className='px-4 py-2'>Base Stat</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pokemon.stats && pokemon.stats.map((stat, index) => {
                   return (
-                    <p key={index}>{stat.stat.name}: {stat.base_stat}</p>
+                    <tr key={index}>
+                      <td className='border px-4 py-2'>{stat.stat.name}</td>
+                      <td className='border px-4 py-2'>{stat.base_stat}</td>
+                    </tr>
                   )
-                })
-              }
-            </div>
-          </div>
-        </div>
+                })}
+              </tbody>
+            </table>
+          </CardContent>
+        </Card>
       </div>
     </>
   )
