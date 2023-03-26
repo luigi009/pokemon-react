@@ -11,8 +11,6 @@ yarn install
 2. After installing the project's dependencies, use the following commands to access the project and start it:
 
 ```bash
-yarn install
-
 cd pokemon-react
 
 yarn start
@@ -33,4 +31,4 @@ The libraries used in this project are:
 
 ## What is the project about?
 
-The project is consuming the API of [PokéAPI](https://pokeapi.co/), which is a RESTful API that provides a wealth of information about the Pokémon universe. In the home page you can see a list of all the Pokémon, and when you click on "Learn More" you will be redirected to the page of the Pokémon you clicked on, where you can see more details about it and select if the pokemon is your favorite. To see your favorite Pokémon, you can click on the "Heart" icon in the header, and you will be redirected to the page of your favorite Pokémon.
+The project is consuming the API of [PokéAPI](https://pokeapi.co/), which is a RESTful API that provides a wealth of information about the Pokémon universe. In the home page you can see a list of all the Pokémon, and when you click on "Learn More" you will be redirected to the page of the Pokémon you clicked on, where you can see more details about it and select if the pokemon is your favorite. To see your favorite Pokémon, you can click on the "Heart" icon in the header from the home page, and you will be redirected to the page of your favorite Pokémon.
