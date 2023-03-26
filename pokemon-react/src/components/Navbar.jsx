@@ -11,7 +11,7 @@ export default function Navbar() {
   const totalFavorite = favoritePokemon.length;
   return (
     <>
-      <div className="flex justify-between items-center px-10 sm:px-6 py-1 bg-[#191d21]">
+      <div className="flex justify-between items-center px-6 sm:px-6 py-1 bg-[#191d21]">
         <div className="flex justify-start items-center">
           <Link to="/">
             <img
