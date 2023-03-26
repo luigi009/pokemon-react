@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import { IconButton } from "@mui/material";
@@ -16,17 +16,16 @@ export default function Pokemon() {
   const { name } = useParams();
 
   //Function to get the character of each pokemon
-  const getPokemon = async () => {
+  const getPokemon = useCallback(async () => {
     const { data } = await axios.get(
       `https://pokeapi.co/api/v2/pokemon/${name}`
     );
     setPokemon(data);
-    return data;
-  };
+  }, [name]);
 
   useEffect(() => {
-    getPokemon(); // eslint-disable-next-line
-  }, []);
+    getPokemon();
+  }, [name, getPokemon]);
 
   //Funciton when click in the favorite button change the color of the icon
   const [favorite, setFavorite] = useState(false);
@@ -71,9 +70,14 @@ export default function Pokemon() {
 
     if (isFavorite) {
       setFavorite(true);
-      document.querySelector(".favorite-icon").style.color = "red";
+      const favoriteIcon = document.querySelector(".favorite-icon");
+
+      //Check if the favorite icon is loaded
+      if (favoriteIcon) {
+        favoriteIcon.style.color = "red";
+      }
     }
-  }, []); // eslint-disable-line
+  }, [name, pokemon]);
 
   //Go back the previous page
   const goBack = () => {
