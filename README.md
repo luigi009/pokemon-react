@@ -1,6 +1,6 @@
 # Pokemon-react
 
-##How to start the project?
+## How to start the project?
 
 1. To start the project it is necessary to use the following command to install the project dependencies:
 
@@ -25,10 +25,11 @@ In this project we are using [React](https://react.dev/).
 ## What libraries were used?
 
 The libraries used in this project are:
-[TailwindCSS](https://tailwindcss.com/)
-[React Router](https://reactrouter.com/)
-[Material UI](https://material-ui.com/)
-[Axios](https://axios-http.com/)
+
+- [TailwindCSS](https://tailwindcss.com/)
+- [React Router](https://reactrouter.com/)
+- [Material UI](https://material-ui.com/)
+- [Axios](https://axios-http.com/)
 
 ## What is the project about?
 
